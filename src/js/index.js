@@ -11,7 +11,7 @@ import "../style/index.scss";
         socialMediaPosition: "left", // social media bar position (left or right)
         
         twitter: null, // social media usernames
-        github: "alesanchezr",
+        github: null,
         linkedin: null,
         instagram: null,
 
@@ -23,7 +23,7 @@ import "../style/index.scss";
     }
  */
 function render(variables = {}) {
-  console.log("These are the current variables: ", variables); //print on the console
+  //console.log("These are the current variables: ", variables); //print on the console
   // here we ask the logical questions to make decisions on how to build the html
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
@@ -33,14 +33,32 @@ function render(variables = {}) {
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/alesanchezr"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="https://github.com/alesanchezr"><i class="fa fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/alesanchezr"><i class="fa fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/alesanchezr"><i class="fa fa-instagram"></i></a></li>
+          <h1>${variables.name || "First Name"} ${variables.lastname ||
+    "Last Name"} </h1>
+          <h2>${variables.role || "Role"}</h2>
+          <h3>${variables.city || "City"}, ${variables.country ||
+    "Country"}</h3>
+          <ul class=${variables.socialMediaPosition}>
+            <li><a href="${
+              variables.twitter == null
+                ? "https://twitter.com/"
+                : "https:/twitter.com/" + variables.twitter
+            }"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="${
+              variables.github == null
+                ? "https://github.com/"
+                : "https://github.com/" + variables.github
+            }"><i class="fa fa-github"></i></a></li>
+            <li><a href="${
+              variables.linkedin == null
+                ? "https://linkedin.com/"
+                : "https://linkedin.com/" + variables.linkedin
+            }"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="${
+              variables.instagram == null
+                ? "https://instagram.com"
+                : "https://instagram.com/" + variables.instagram
+            }"><i class="fa fa-instagram"></i></a></li>
           </ul>
         </div>
     `;
@@ -61,7 +79,7 @@ window.onload = function() {
     socialMediaPosition: "position-left",
     // social media usernames
     twitter: null,
-    github: "alesanchezr",
+    github: null,
     linkedin: null,
     instagram: null,
     name: null,
